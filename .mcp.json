@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dashi-channel": {
+      "command": "bun",
+      "args": ["./dashi-plugin-claude-code/plugin/src/server.ts"]
+    }
+  }
+}

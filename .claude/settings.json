@@ -1,0 +1,48 @@
+{
+  "enabledMcpjsonServers": ["dashi-channel"],
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "mcp__dashi-channel__reply",
+      "mcp__dashi-channel__react",
+      "mcp__dashi-channel__edit_message",
+      "mcp__dashi-channel__download_attachment",
+      "mcp__dashi-channel__status",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git clone*)",
+      "Bash(git pull*)",
+      "Bash(bun *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(pwd)",
+      "Bash(which *)",
+      "Bash(systemctl status *)",
+      "Bash(journalctl *)"
+    ],
+    "deny": [
+      "Bash(sudo *)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)"
+    ]
+  }
+}

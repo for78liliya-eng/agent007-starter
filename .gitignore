@@ -1,0 +1,17 @@
+# Secrets never leave the machine
+secrets/*
+!secrets/channel.env.example
+*.env
+*.key
+*.pem
+
+# Personal data of the owner and agent memory
+core/USER.md
+core/memory/*
+!core/memory/.gitkeep
+
+# Runtime
+.state/
+outbox/
+node_modules/
+*.log

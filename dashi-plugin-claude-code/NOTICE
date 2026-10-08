@@ -1,0 +1,12 @@
+dashi-channel — Telegram channel plugin for Claude Code.
+
+Original work: https://github.com/qwwiwi/dashi-plugin-claude-code
+Licensed under the Apache License, Version 2.0 (see LICENSE in this folder).
+
+This folder contains a copy of the plugin with modifications made for the
+"Агент 007 на минималках" course starter:
+- chat gate: in a private chat (chat.id == user.id) an allowed sender is
+  accepted without a separate allowed-chats list;
+- added a missing state store module and fixed .gitignore so it is not excluded;
+- bun.lock is committed so every student gets the same dependency versions;
+- .mcp.json removed from the plugin folder; the starter registers the server in its root .mcp.json.
