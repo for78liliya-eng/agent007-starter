@@ -6,7 +6,7 @@ secrets/*
 *.pem
 
 # Personal data of the owner and agent memory
-core/USER.md
+core/USER.md*
 core/memory/*
 !core/memory/.gitkeep
 
@@ -15,3 +15,6 @@ core/memory/*
 outbox/
 node_modules/
 *.log
+
+# Backup copies the agent makes before risky edits (may hold personal data)
+*.bak*
