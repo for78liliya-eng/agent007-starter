@@ -105,6 +105,10 @@ test("service unit runs start.sh in tmux, restarts itself, confirms the channels
   expect(unit).toContain(`cd ${agent} && bash start.sh`);
   expect(unit).toContain("Restart=always");
   expect(unit).toContain('grep -q "development channels"');
+  expect(unit).toContain('grep -q "Yes, I trust this folder"');
+  // systemd turns $$ into a literal $; the heredoc is unquoted, so the script must write \$\$
+  expect(unit).toContain('for i in $$(seq 1 30)');
+  expect(unit).toContain('echo "$$p"');
   expect(readFileSync(join(dir, "sys.log"), "utf8")).toContain("systemctl enable agent");
 });
 
