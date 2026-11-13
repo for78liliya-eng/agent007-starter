@@ -220,12 +220,13 @@ WorkingDirectory=${AGENT_DIR}
 Environment=HOME=${HOME}
 Environment=PATH=${HOME}/.local/bin:${HOME}/.bun/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ExecStart=/usr/bin/tmux -L ${n} new-session -d -s ${n} 'cd ${AGENT_DIR} && bash start.sh'
-# Confirm the one-time "development channels" warning, nobody is at the keyboard.
-ExecStartPost=/bin/sh -c 'for i in 1 2 3 4 5 6 7 8 9 10 11 12; do sleep 5; if /usr/bin/tmux -L ${n} capture-pane -p -t ${n} 2>/dev/null | grep -q "development channels"; then /usr/bin/tmux -L ${n} send-keys -t ${n} Enter; break; fi; done'
+# Nobody is at the keyboard: accept the folder-trust question if it shows up (e.g. a second
+# agent installed while the first one rewrote ~/.claude.json), then the "development channels" warning.
+ExecStartPost=/bin/sh -c 'for i in \$\$(seq 1 30); do sleep 5; p=\$\$(/usr/bin/tmux -L ${n} capture-pane -p -t ${n} 2>/dev/null); if echo "\$\$p" | grep -q "Yes, I trust this folder"; then /usr/bin/tmux -L ${n} send-keys -t ${n} Enter; elif echo "\$\$p" | grep -q "development channels"; then /usr/bin/tmux -L ${n} send-keys -t ${n} Enter; break; fi; done'
 ExecStop=-/usr/bin/tmux -L ${n} kill-server
 Restart=always
 RestartSec=5
-TimeoutStartSec=120
+TimeoutStartSec=180
 
 [Install]
 WantedBy=multi-user.target
