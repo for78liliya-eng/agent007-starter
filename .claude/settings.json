@@ -35,6 +35,9 @@
       "Bash(pwd)",
       "Bash(which *)",
       "Bash(systemctl status *)",
+      "Bash(systemctl restart agent)",
+      "Bash(echo *)",
+      "Bash(wc *)",
       "Bash(journalctl *)"
     ],
     "deny": [
