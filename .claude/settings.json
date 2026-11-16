@@ -1,7 +1,7 @@
 {
   "enabledMcpjsonServers": ["dashi-channel"],
   "permissions": {
-    "defaultMode": "acceptEdits",
+    "defaultMode": "auto",
     "allow": [
       "Read",
       "Write",
