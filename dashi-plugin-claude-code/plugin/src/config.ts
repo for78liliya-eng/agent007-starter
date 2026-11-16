@@ -275,6 +275,16 @@ export function loadConfig(env: NodeJS.ProcessEnv): AppConfig {
   if (parsedEnv.TELEGRAM_MEMORY_AGENT_LABEL !== undefined) memory.agent_label = parsedEnv.TELEGRAM_MEMORY_AGENT_LABEL
   if (Object.keys(memory).length > 0) merged.memory = memory
 
+  // Permission prompts go to the agent's owner. Without an explicit
+  // permission_relay.allowed_user_ids they used to fall back to the upstream
+  // author's id (164795011): prompts never reached the owner, and that
+  // stranger could have answered them. Default to the main allowlist instead.
+  const relay = (merged.permission_relay && typeof merged.permission_relay === 'object' ? merged.permission_relay : {}) as Record<string, unknown>
+  if (relay.allowed_user_ids === undefined && merged.allowed_user_ids !== undefined) {
+    relay.allowed_user_ids = merged.allowed_user_ids
+    merged.permission_relay = relay
+  }
+
   try {
     return AppConfigSchema.parse(merged)
   } catch (err) {
