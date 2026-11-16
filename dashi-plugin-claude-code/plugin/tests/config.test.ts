@@ -61,6 +61,18 @@ describe('loadConfig', () => {
     expect(cfg.album.flush_ms).toBe(1500)
   })
 
+  test('permission prompts go to the owner from TELEGRAM_ALLOWED_USER_IDS, not the upstream default', () => {
+    const cfg = loadConfig(env({ TELEGRAM_ALLOWED_USER_IDS: '524821353' }))
+    expect(cfg.permission_relay.allowed_user_ids).toEqual([524821353])
+    expect(cfg.permission_relay.allowed_user_ids).not.toContain(164795011)
+  })
+
+  test('explicit permission_relay.allowed_user_ids in config.json is kept', () => {
+    writeFileSync(join(stateDir, 'config.json'), JSON.stringify({ permission_relay: { allowed_user_ids: [777] } }))
+    const cfg = loadConfig(env({ TELEGRAM_ALLOWED_USER_IDS: '524821353' }))
+    expect(cfg.permission_relay.allowed_user_ids).toEqual([777])
+  })
+
   test('rejects config with empty allowed_user_ids array', () => {
     writeFileSync(join(stateDir, 'config.json'), JSON.stringify({
       allowed_user_ids: [],
